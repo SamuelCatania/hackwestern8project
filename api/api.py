@@ -1,19 +1,13 @@
 import time
-from flask import Flask
+from flask import Flask, json, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder='../build', static_url_path='/')
-
-
-@app.errorhandler(404)
-def not_found(e):
-    return app.send_static_file('index.html')
-
-
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
-
+CORS(app)
 
 @app.route('/api/time')
 def get_current_time():
-    return {'time': time.time()}
+    return jsonify({"somethingelse": time.time()})
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=3000)
