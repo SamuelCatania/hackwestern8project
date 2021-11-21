@@ -3,14 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [currentTime, setCurrentTime] = useState([]);
   
-  const [currentTime, setCurrentTime] = useState(0);
-
   useEffect(() => {
-    fetch('/api/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
+    fetch('http://localhost:5000/api/time')
+    .then(response => {
+      console.log("im over here!"); 
+      console.log(response); 
+      return response.json()})
+    .then(data => {
+      console.log(data);
+      console.log("hello");
+      setCurrentTime(data.somethingelse);
     });
   }, []);
+
 
   return (
     <div className="App">
